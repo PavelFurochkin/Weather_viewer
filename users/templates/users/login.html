@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %} Авторизация {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header text-center bg-primary text-white">
+                        <h4>Вход</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <!-- Сообщения об успехе или ошибке -->
+                            {% if messages %}
+                                <div class="mb-3">
+                                    {% for message in messages %}
+                                        <div class="alert alert-info">{{ message }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            <!-- Поля формы -->
+                            {% for field in form %}
+                                <div class="mb-3">
+                                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                        <div class="form-text">{{ field.help_text }}</div>
+                                    {% endif %}
+                                    {% if field.errors %}
+                                        <div class="text-danger">
+                                            {{ field.errors|striptags }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+
+                            <!-- Кнопка отправки -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Войти</button>
+                            </div>
+                            <p class="text-center mb-0">
+                                Еще нет аккаунта? <a href="{% url 'users:registration' %}">Зарегистрируйтесь здесь</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
