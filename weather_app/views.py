@@ -10,7 +10,7 @@ from weather_app.dto import LocationWeatherDTO
 
 
 class StartPage(LoginRequiredMixin, ListView):
-    template_name = 'weather_app/index.html'
+    template_name = 'weather/pages/index.html'
     context_object_name = 'locations'
     paginate_by = 4
 
