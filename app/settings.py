@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'weather_app.apps.WeatherAppConfig',
     'users.apps.UserConfig'
 ]
@@ -146,3 +147,6 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
 ]
+
+LOGIN_REDIRECT_URL = "weather:main"
+LOGOUT_REDIRECT_URL = "users:login"

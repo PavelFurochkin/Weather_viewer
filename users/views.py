@@ -22,7 +22,10 @@ class UserLogin(FormView):
     form_class = AuthorizationForm
     template_name = 'users/login.html'
     redirect_authenticated_user = True
-    success_url = reverse_lazy('weather_app:main')
+    # success_url = reverse_lazy('weather_app:main')
+
+    def get_success_url(self):
+        return reverse_lazy('weather_app:main')
 
     def form_valid(self, form):
         login(self.request, form.get_user())
@@ -33,4 +36,4 @@ class UserLogin(FormView):
 
 
 class LogoutUser(LogoutView):
-    next_page = reverse_lazy('weather_app:main')
+    next_page = reverse_lazy('users:login')

@@ -34,6 +34,12 @@
             </div>
         </div>
     </nav>
-
-
+        <!-- Поле для ввода (поиск) под навигацией -->
+    <div class="container mt-4">
+        <form action="{% url 'weather_app:search' %}" method="get" class="d-flex align-items-center">
+            <input class="form-control me-3 fs-5" type="search" name="location"
+                placeholder="Введите название населенного пункта" aria-label="Искать">
+            <button class="btn btn-outline-success fs-5" type="submit">Искать</button>
+        </form>
+    </div>
 </div>

@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from decimal import Decimal
 
 
 @dataclass
@@ -11,6 +12,6 @@ class LocationWeatherDTO:
     icon_id: str = None
     name: str = None
     country: str = None
-    latitude: float = None
-    longitude: float = None
+    latitude: Decimal = None
+    longitude: Decimal = None
 

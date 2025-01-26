@@ -1,5 +1,6 @@
-import requests
 
+import requests
+from decimal import Decimal
 from django.conf import settings
 
 from weather_app.dto import LocationWeatherDTO
@@ -24,8 +25,8 @@ class WeatherApiService:
                 LocationWeatherDTO(
                     name=loc.get('name'),
                     country=loc.get('country'),
-                    longitude=loc.get('longitude'),
-                    latitude=loc.get('latitude')
+                    longitude=loc.get('lon'),
+                    latitude=loc.get('lat')
                 )
                 for loc in data
             ]
@@ -33,7 +34,7 @@ class WeatherApiService:
             print(f'Ошибка: {e}')
 
     @classmethod
-    def get_location_by_coord(cls, lat: float, lon: float) -> LocationWeatherDTO:
+    def get_location_by_coord(cls, lat: Decimal, lon: Decimal) -> LocationWeatherDTO:
         __url = "https://api.openweathermap.org/data/2.5/weather"
         params = {'lat': lat,
                   'lon': lon,

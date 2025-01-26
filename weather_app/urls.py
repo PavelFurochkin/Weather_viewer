@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views import StartPage
+from .views import StartPage, SearchPage
 
 app_name = "weather_app"
 urlpatterns = [
     path("", StartPage.as_view(), name="main"),
-    # path("search/", SearchPage.as_view(), name="search"),
+    path("search/", SearchPage.as_view(), name="search"),
 ]

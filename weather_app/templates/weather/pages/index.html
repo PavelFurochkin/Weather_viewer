@@ -8,27 +8,25 @@
 
 {% block content %}
 <main class="container">
-    <!-- <div class="row g-3"> -->
     <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
         {% for location in locations %}
         <div class="col-md-3">
             <div class="card text-left mb-3 h-100" style="width: 18rem;">
-                <img src="{% static 'weather/images/' %}{{ location.weather.icon_id }}.svg" class="card-img-top img-fluid" alt="Иконка погоды">
+                <img src="{% static 'weather/images/' %}{{ location.icon_id }}.svg" class="card-img-top img-fluid" alt="Иконка погоды">
                 <div class="card-body">
-                    <form method="post" name="delete">
+                    <form method="post" class="mt-auto" name="delete" >
                         {% csrf_token %}
                         <input type="hidden" name="latitude" value="{{ location.latitude }}">
                         <input type="hidden" name="longitude" value="{{ location.longitude }}">
                         <button type="submit" class="btn-close position-absolute top-0 end-0 m-2" aria-label="Close">
                         </button>
                     </form>
-                    <h3 class="card-title">{{location.weather.temperature}}°C</h3>
-                    <!-- <p class="fw-semibold mb-1">{{ weather.location.name }}, {{ weather.location.country }}</p> -->
+                    <h3 class="card-title">{{location.temperature}}°C</h3>
                     <h5 class="card-subtitle mb-4">{{ location.name }}, {{ location.country }}</h5>
-                    <p class="card-text mb-1">Ощущается как {{ location.weather.temperature_feels_like }}°C.
-                        {{location.weather.weather_desc }}</p>
-                    <p class="card-text mb-1">Скорость ветра: {{ location.weather.wind_speed }}м/c</p>
-                    <p class="card-text">Влажность: {{ location.weather.humidity }}%</p>
+                    <p class="card-text mb-1">Ощущается как {{ location.temperature_feels_like }}°C.
+                        {{location.weather_desc }}</p>
+                    <p class="card-text mb-1">Скорость ветра: {{ location.wind_speed }}м/c</p>
+                    <p class="card-text">Влажность: {{ location.humidity }}%</p>
                 </div>
             </div>
         </div>
