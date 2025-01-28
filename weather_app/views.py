@@ -1,10 +1,9 @@
 from decimal import Decimal
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.db import IntegrityError
 from django.contrib import messages
-from django.http import HttpResponse
 import requests
 
 from weather_app.models import Location
@@ -34,37 +33,17 @@ class StartPage( LoginRequiredMixin, ListView):
 
         return weather_data
 
-    # def delete(self, request, *args, **kwargs):
-    #     try:
-    #         location = Location.objects.filter(user=request.user).get(
-    #             longitude=float(request.POST['longitude'].replace(',', '.')),
-    #             latitude=float(request.POST['latitude'].replace(',', '.'))
-    #         )
-    #         location.delete()
-    #         messages.success(request, "Локация удалена.")
-    #     except Exception as e:
-    #         messages.error(request, f'Не удалось удалить локацию: {e}')
-    #
-    #     return redirect('weather_app:main')
-
     def post(self, request, *args, **kwargs):
         """Обрабатывает удаление локации."""
-        longitude = Decimal(request.POST['longitude'].replace(',', '.'))
-        latitude = Decimal(request.POST['latitude'].replace(',', '.'))
-        locations = Location.objects.filter(user=request.user)
+        latitude_request = Decimal(request.POST["latitude"].replace(',', '.'))
+        longitude_request = Decimal(request.POST["longitude"].replace(',', '.'))
         try:
-            location = Location.objects.filter(user=request.user).get(
-                longitude=Decimal(request.POST['longitude'].replace(',', '.')),
-                latitude=Decimal(request.POST['latitude'].replace(',', '.'))
-            )
-            # location = Location.objects.filter(
-            #     user=request.user,
-            #     latitude=latitude,
-            #     longitude=longitude
-            # ).first()
-            if location:
-                location.delete()
-                messages.success(request, "Локация удалена.")
+            location = Location.objects.filter(
+                user=request.user, longitude=latitude_request,
+                latitude=longitude_request).first()
+
+            location.delete()
+            messages.success(request, "Локация удалена.")
         except Exception as e:
             messages.error(request, f'Не удалось удалить локацию: {e}')
 

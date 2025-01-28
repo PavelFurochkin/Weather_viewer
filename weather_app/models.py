@@ -7,8 +7,8 @@ class Location(models.Model):
                              on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     country = models.CharField(max_length=10, null=True)
-    latitude = models.DecimalField(max_digits=6, decimal_places=4)
-    longitude = models.DecimalField(max_digits=6, decimal_places=4)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
 
     class Meta:
         constraints = [
