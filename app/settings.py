@@ -151,3 +151,6 @@ PASSWORD_HASHERS = [
 LOGIN_REDIRECT_URL = "weather:main"
 LOGOUT_REDIRECT_URL = "users:login"
 LOGIN_URL = 'users:login'
+
+SESSION_COOKIE_AGE = 7200
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'

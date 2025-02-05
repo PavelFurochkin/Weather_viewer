@@ -13,12 +13,11 @@
         {% for message in messages %}
         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
             {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endfor %}
     </div>
     {% endif %}
-    <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
+    <div class="row ${2| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
         {% for location in locations %}
         <div class="col-md-3">
             <div class="card text-left mb-3 h-100" style="width: 18rem;">
@@ -33,7 +32,10 @@
                         </button>
                     </form>
                     <h3 class="card-title">{{location.temperature}}°C</h3>
-                    <h5 class="card-subtitle mb-4">{{ location.name }}, {{ location.country }}</h5>
+                    <h5 class="card-subtitle mb-4">{{ location.name }}, <img class='rounded-1 border'
+                         src="{% static 'weather/flags/' %}{{ location.country|lower }}.svg" height="25px"
+                         alt=""> {{ location.country }}
+                    </h5>
                     <p class="card-text mb-1">Ощущается как {{ location.temperature_feels_like }}°C.
                         {{location.weather_desc }}</p>
                     <p class="card-text mb-1">Скорость ветра: {{ location.wind_speed }}м/c</p>

@@ -21,13 +21,13 @@ class StartPage( LoginRequiredMixin, ListView):
         locations = Location.objects.filter(user=self.request.user).order_by('-id')
 
         weather_data = []
-
+        message = None
         for loc in locations:
             weather = LocationWeatherDTO()
             try:
                 weather = WeatherApiService.get_location_by_coord(loc.latitude, loc.longitude)
             except requests.exceptions.RequestException as e:
-                messages.error(self.request, str(f'Ошибка запроса к API: {e}'))
+                message = messages.error(self.request, str(f'Сервис погоды недоступен: {e}'))
 
             weather_data.append(weather)
 
