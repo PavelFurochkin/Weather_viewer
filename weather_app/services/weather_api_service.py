@@ -1,4 +1,3 @@
-
 import requests
 from decimal import Decimal
 from django.conf import settings
@@ -16,7 +15,7 @@ class WeatherApiService:
         params = {'q': name,
                   'limit': limit,
                   'appid': cls.__SECRET_KEY,
-                  'land': 'ru'}
+                  'lang': 'ru'}
         try:
             response = requests.get(__url, params)
             response.raise_for_status()
@@ -26,7 +25,9 @@ class WeatherApiService:
                     name=loc.get('name'),
                     country=loc.get('country'),
                     longitude=loc.get('lon'),
-                    latitude=loc.get('lat')
+                    latitude=loc.get('lat'),
+                    state=loc.get('state', '---')
+
                 )
                 for loc in data
             ]
@@ -39,7 +40,7 @@ class WeatherApiService:
         params = {'lat': lat,
                   'lon': lon,
                   'appid': cls.__SECRET_KEY,
-                  'land': 'ru',
+                  'lang': 'ru',
                   'units': 'metric'}
         try:
             response = requests.get(__url, params)
@@ -48,6 +49,3 @@ class WeatherApiService:
             return LocationWeatherMapper.dict_to_dto(data)
         except requests.HTTPError as e:
             print(f'Ошибка: {e}')
-
-
-

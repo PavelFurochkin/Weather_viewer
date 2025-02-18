@@ -1,0 +1,44 @@
+version: "4.38.0"
+
+services:
+  db:
+    image: postgres:17
+    container_name: weather_db
+    volumes:
+      - postgres_data:/var/lib/postgressql/data
+    env_file:
+      - .env
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django_app
+    env_file:
+      - .env
+    expose:
+      - 8000
+    depends_on:
+      - db
+    volumes:
+      - static_volume:/user/static
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+            python manage.py migrate &&
+            gunicorn app.wsgi:application --bind 0.0.0.0:8000"
+
+  nginx:
+    build:
+      context: ./docker/nginx/
+    container_name: weather_nginx
+    volumes:
+      - static_volume:/user/static
+    depends_on:
+      - web
+    ports:
+      - "${NGINX_EXTERNAL_PORT}:80"
+
+volumes:
+  static_volume:
+  postgres_data:
+      

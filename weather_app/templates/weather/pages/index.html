@@ -32,7 +32,8 @@
                         </button>
                     </form>
                     <h3 class="card-title">{{location.temperature}}°C</h3>
-                    <h5 class="card-subtitle mb-4">{{ location.name }}, <img class='rounded-1 border'
+                    <h5 class="card-subtitle mb-4">{{ location.name }}<br>
+                        <img class='rounded-1 border'
                          src="{% static 'weather/flags/' %}{{ location.country|lower }}.svg" height="25px"
                          alt=""> {{ location.country }}
                     </h5>
