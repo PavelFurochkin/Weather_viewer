@@ -14,4 +14,5 @@ class LocationWeatherDTO:
     country: str = None
     latitude: Decimal = None
     longitude: Decimal = None
+    state: str = None
 

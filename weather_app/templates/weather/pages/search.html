@@ -21,7 +21,7 @@
         <div class="col h-100 p-3">
             <div class="card h-100 p-3" style="min-height: 300px;">
                 <div class="card-body card-body d-flex flex-column">
-                    <h5 class="card-title mb-4">{{ location.name }},
+                    <h5 class="card-title mb-4">{{ location.name }}
                         <img class='rounded-1 border'
                              src="{% static 'weather/flags/' %}{{ location.country|lower }}.svg" height="25px"
                              alt="">
@@ -29,6 +29,7 @@
                     <p class="cart-text mb-1">Широта: {{ location.latitude }}</p>
                     <p class="cart-text mb-1">Долгота: {{ location.longitude }}</p>
                     <p class="cart-text mb-1">Страна: {{ location.country }}</p>
+                    <p class="cart-text mb-1">Регион: {{ location.state }}</p>
                     <form method="post" name="save" class="mt-auto">
                         {% csrf_token %}
                         <input type="hidden" name="name" value="{{ location.name }}">

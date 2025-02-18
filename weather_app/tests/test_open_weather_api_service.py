@@ -1,5 +1,5 @@
 import decimal
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from django.test import TestCase, RequestFactory
 from django.contrib.auth import get_user_model
 from django.contrib.messages.storage.fallback import FallbackStorage
