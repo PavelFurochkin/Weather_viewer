@@ -13,7 +13,7 @@ RUN adduser -D user
 WORKDIR /app
 
 # Переключаемся на созданного пользователя
-RUN mkdir /app/static && chown -R user:user /app && chmod -R 755 /app
+RUN mkdir /app/staticfiles && chown -R user:user /app && chmod -R 755 /app
 
 COPY --chown=user:user . .
 
