@@ -25,6 +25,7 @@
 - WEATHER_API_KEY=Уникальный ключ [OpenWeatherAPI](https://home.openweathermap.org/api_keys)
 - SECRET_KEY= секретный ключ Django
 - NGINX_EXTERNAL_PORT=80(Порт БД)
+- ALLOWED_HOSTS=Список доменов, которые может обслуживать это приложение
 
 ## Доступные страницы
 - - - 
