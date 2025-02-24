@@ -35,7 +35,7 @@ class WeatherApiService:
             print(f'Ошибка: {e}')
 
     @classmethod
-    def get_location_by_coord(cls, lat: Decimal, lon: Decimal) -> LocationWeatherDTO:
+    def get_location_by_coord(cls, lat: Decimal, lon: Decimal, name: str) -> LocationWeatherDTO:
         __url = "https://api.openweathermap.org/data/2.5/weather"
         params = {'lat': lat,
                   'lon': lon,
@@ -46,6 +46,7 @@ class WeatherApiService:
             response = requests.get(__url, params)
             response.raise_for_status()
             data = response.json()
+            data.update({'name': name})
             return LocationWeatherMapper.dict_to_dto(data)
         except requests.HTTPError as e:
             print(f'Ошибка: {e}')
